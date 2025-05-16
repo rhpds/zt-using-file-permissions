@@ -1,3 +1,5 @@
+=== What are file permissions?
+
 It is important to properly assign permissions to files and directories
 created on a shared system so that files are not accidentally (or
 maliciously) tampered with, destroyed, or executed. The next section
@@ -6,33 +8,42 @@ shows you how to view the permissions of files in an example directory.
 == Displaying files and their permissions
 
 There are two tabs in the web interface. Click on the tab labelled
-`+Root+`.
+`*>_ root*`.
 
 .root tab
-image::../assets/roottab.png[root tab]
+image::root-tab-zt-2.png[root tab]
 
 For this lab, several files have been created for you to work with in
-the `+/srv+` directory. Use the `+cd+` command to navigate there:
+the `*/srv*` directory. Use the `*cd*` command to navigate there:
 
-[source,bash]
+.Command
+[source,bash,subs="+macros,+attributes",role=execute]
 ----
 cd /srv
 ----
 
-The command `+ls -l+` can be used to look at the permissions associated
+This command has no expected output.
+
+The command `*ls -l*` can be used to look at the permissions associated
 with each file in the directory. The output for this can be cryptic at
 first, so this step will walk you through what each character means.
 Take a look at the contents of the current directory. Use the long
-listing option (`+-l+`) to display information about permissions for
+listing option (`*-l*`) to display information about permissions for
 each item.
 
-[source,bash]
+.Command
+[source,bash,subs="+macros,+attributes",role=execute]
 ----
 ls -l
 ----
 
-.ls output
-image::../assets/ls-output.png[ls output]
+.Output
+[source,text]
+----
+drw-r-----. 2 root root  94 Jun  2 21:08 proprietary
+-rwxr-x---. 1 root root  66 Jun  2 21:08 status.sh
+-rwxr-x---. 1 root root 117 Jun  2 21:08 tasks.txt
+----
 
 Let’s look a bit closer at the permissions.
 
@@ -41,10 +52,9 @@ mode. The access mode *-rwxr-x—*, seen here for the *status.sh* file,
 conveys the following information:
 
 .permission string breakdown
-image::https://github.com/rhel-labs/learn-katacoda/raw/master/instruqt/file-permissions/assets/lsExplanation.png[permission
-string breakdown]
+image::lsExplanation.png[ls Explanation]
 
-The middle columns of the `+ls+` output give information about the user
+The middle columns of the `*ls*` output give information about the user
 ownership and group ownership of the files, their size, the time last
 modified, and finally the file/directory name itself. The next steps
 will walk you through the importance of the file ownership fields.

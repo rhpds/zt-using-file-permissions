@@ -1,57 +1,83 @@
-The owner user and owner group will have full permissions, but others
-will only be able to read the file.
+=== Changing permissions (symbolic)
 
-Return to *Root tab*.
+In this step, you will be modifying the permissions on the `*status.sh*`
+script using *symbolic* syntax with the `*chmod*` command. In the
+previous step, you were unable to execute *status.sh* as *rhel*. To
+change that, use the `*chmod*` command. The plus (`*+*`) operator will
+add any permissions that you specify, but it will not change any
+permissions that you do not explicitly set in the command. So in this
+case, it will give others read and execute access, but will not change
+the value of write access for the group. Return to the root terminal to
+execute this command.
 
-Use `+chmod+` to modify the permissions on *status.sh* as previously
-discussed.
+Go back to the *>_ root* tab.
 
-[source,bash]
+Now change the permission of `*status.sh*`.
+
+.Command
+[source,bash,subs="+macros,+attributes",role=execute]
 ----
-chmod 774 status.sh
+chmod o+rx status.sh
 ----
 
-Confirm that this change has succeeded by checking the access mode for
-*status.sh*
+This command has no expected output.
 
-[source,bash]
+Verify that this command succeeded using `*ls -l*`, specifying that you
+want to only look at *status.sh*.
+
+.Command
+[source,bash,subs="+macros,+attributes",role=execute]
 ----
 ls -l status.sh
 ----
 
-Go back to the *Guest tab*.
+.Output
+[source,text]
+----
+-rwxr-xr-x. 1 root root 68 Mar  5 22:00 status.sh
+----
 
-Verify that you do not have permission to execute the status script as
-*guest*:
+NOTE: Just as `*o+rx*` added read and execute permissions for others,
+`*chmod*` accepts the `*-*` argument to take away permissions. For
+example, `*o-w*` would remove write privileges from others while leaving
+the read and execute values untouched. The `*=*` argument can be used to
+explicitly set all permissions symbolically.
 
-[source,bash]
+
+Now the *rhel* user will be able to read and execute *status.sh*.
+Switch back to the *>_ rhel* tab and re-run the status script:
+
+.Command
+[source,bash,subs="+macros,+attributes",role=execute]
 ----
 ./status.sh
 ----
 
-.denied!
-image::../assets/absolutepermissionchangedenied.png[denied!]
+.Output
+[source,text]
+----
+status.sh successfully executed by rhel
+----
 
-However, if you try to read this file, you will see you do have read
-access as *guest*:
+Since you added read and execute permissions, you can do more than just
+execute this file as *rhel*. Use the `*cat*` command to verify that you
+can read this file as *rhel*.
 
-[source,bash]
+.Command
+[source,bash,subs="+macros,+attributes",role=execute]
 ----
 cat status.sh
 ----
 
-.readable
-image::../assets/readable.png[readable]
+.Output
+[source,text]
+----
+#! /bin/bash
+echo -n "status.sh successfully executed by "
+whoami
+----
 
-____
-_NOTE:_ You can use `+vi+` or any other write command to verify that you
-do not have write access as *guest* if you wish to verify this as well.
-____
-
-Many users default to absolute permissions because of how much quicker
-they are to type. If you are still unsure exactly what these commands
-are doing, please check out the "`How do I manage permissions?`" section
-of https://www.redhat.com/sysadmin/manage-permissions[this Enable
-Sysadmin article] to learn more.
-
-The next step will walk you through changing which user owns a file.
+Symbolic mode is the more expanded permissions format which can appeal
+to newer users. However, the absolute mode described in the next step
+can save on keystrokes if you take the time to familiarize yourself with
+it.

@@ -1,31 +1,89 @@
-Group ownership can be changed with the `+chgrp+` command by adding a
-colon before the name of the group.
+=== Changing file ownership
 
-Return to the *Root tab*.
+Sometimes it is useful to change who owns a file so that permissions can align with the purpose of the file. The chown command can do this very easily. Just specify the new owner and the file you would like to change.
 
-Change the group permission of the *tasks.txt* file:
+From the *>_ root* tab confirm that *root* is the initial owner of the file
+*tasks.txt*:
 
-[source,bash]
-----
-chown :team tasks.txt
-----
-
-Verify the change using `+ls -l+`:
-
-[source,bash]
+.Command
+[source,bash,subs="+macros,+attributes",role=execute]
 ----
 ls -l tasks.txt
 ----
 
-This change is reflected in the fourth column of the `+ls -l+` output,
-which now says *team* instead of *root*.
+.Output
+[source,text]
+----
+-rwxr-x---. 1 root root 128 Mar  5 22:00 tasks.txt
+----
 
-____
-_NOTE:_ Some people prefer the `+chgrp+` command for changing groups as
-it has identical syntax to `+chown+`, you do not have to add a colon
-when using `+chgrp+`. Others prefer to use `+chown+` with the colon as
-above so that they do not have to remember two different commands.
-____
+The third and fourth column of this output are the user and group that
+own the file. Right now, *root* is the owner in both cases.
 
-The final step in this lab will walk you through using `+find+` to
-locate any files that may have their permissions configured incorrectly.
+.thirdfourth
+image::thirdandfourthcolumn-zt.png[thirdfourth]
+
+Switch to the *>_ rhel* terminal in the bottom pane and attempt to read the
+file:
+
+.Command
+[source,bash,subs="+macros,+attributes",role=execute]
+----
+cat tasks.txt
+----
+
+.Output
+[source,text]
+----
+cat: tasks.txt: Permission denied
+----
+
+This read operation is denied, as *rhel* does not have read permission.
+
+Return to the *>_ root* tab.
+
+Change the user that owns *tasks.txt* to *rhel*:
+
+.Command
+[source,bash,subs="+macros,+attributes",role=execute]
+----
+chown rhel tasks.txt
+----
+
+This command has no expected output.
+
+Return to the *>_rhel* tab.
+
+Run the following command.
+
+.Command
+[source,bash,subs="+macros,+attributes",role=execute]
+----
+ls -l tasks.txt
+----
+
+.Output
+[source,text]
+----
+-rwxr-x---. 1 rhel root 117 Jun  2 23:01 tasks.txt
+----
+
+Now that *rhel* owns the file instead of *root*, this user has
+permission to read the file without reconfiguring the access modes.
+
+.Command
+[source,bash,subs="+macros,+attributes",role=execute]
+----
+cat tasks.txt
+----
+
+.Output
+[source,text]
+----
+1. Finish this Permissions Lab
+2. Do the Networking Configuration Basics Lab
+3. Listen to the latest episode of RHEL Presents
+----
+
+The fourth column of the `*ls -l*` output is the group which owns the
+file. The next step will walk you through changing group ownership.

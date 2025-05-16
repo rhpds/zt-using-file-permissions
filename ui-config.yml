@@ -5,25 +5,18 @@ antora:
   modules:
     - name: "01-what-are-file-permissions"
       label: "What Are File Permissions"
-      solveButton: true
     - name: "02-interacting-with-different-users"
       label: "Interacting With Different Users"
-      solveButton: true
     - name: "03-modifying-permissions"
       label: "Modifying Permissions"
-      solveButton: true
     - name: "04-modifying-absolute"
       label: "Modifying Absolute"
-      solveButton: true
     - name: "05-changing-ownership"
       label: "Changing Ownership"
-      solveButton: true
     - name: "06-changing-group-ownership"
       label: "Changing Group Ownership"
-      solveButton: true
     - name: "07-find-audit-permissions"
       label: "Find Audit Permissions"
-      solveButton: true
 
 tabs:
   - name: ">_ terminal"

@@ -1,84 +1,41 @@
-The `+-perm+` option causes the `+find+` command to look at the access
-modes for each file. In this case you are calling `+find+` without a
-path, which means it will start looking in the current directory.
+=== Changing Group Ownership
 
-First, from the *Root tab*, check for files that have the permission
-level *755*.
+Changing group ownership can be much more efficient than manually assigning owners,
+when there are many users that should have the same access to a file.
 
-[source,bash]
+Group ownership can be changed with the `*chgrp*` command by adding a
+colon before the name of the group.
+
+Return to the *>_ root* tab.
+
+Change the group permission of the *tasks.txt* file:
+
+.Command
+[source,bash,subs="+macros,+attributes",role=execute]
 ----
-find -perm 755
-----
-
-This returns only a hidden OS file:
-
-____
-_NOTE:_ Recall from the previous step that *755* corresponds to read,
-write, and execute access for the owner, and read and execute access for
-everyone else.
-____
-
-Consider a situation where you have determined that any permissions
-above a certain level could pose a security issue. Adding a dash before
-the permission tells the `+find+` command to return anything with a
-permission greater than or equal to the one you are searching for.
-
-[source,bash]
-----
-find -perm -755
+chgrp team tasks.txt
 ----
 
-Notice that this returns many more files. You may not have seen these
-files from the output of `+ls -l+`, but `+find+` searches recursively so
-it can find files that otherwise may slip through the cracks. The
-contract files in the *proprietary* directory should not be readable by
-everyone. Furthermore, since these are text files, they should not be
-executable.
+This command has no expected output.
 
-Running the `+chmod+` command with a level of *600* ensures that these
-files are readable and writable by the owner, but others cannot access
-them. Instead of running `+chmod+` individually on each file, you can
-use the `+find+` command to execute this permission change on any file
-that exceeds a certain permission level. The `+-type f+` option only
-targets files, so the directory permissions will remain unchanged. The
-`+{} \;+` at the end of the command is telling `+find+` to execute the
-`+chmod+` command separately on each file that matches the search
-criteria.
+Verify the change using `*ls -l*`:
 
-[source,bash]
+.Command
+[source,bash,subs="+macros,+attributes",role=execute]
 ----
-find -perm -755 -type f -exec chmod 600 {} \;
+ls -l tasks.txt
 ----
 
-To verify that access has been removed, try to read one of the files as
-the guest account.
-
-Switch to the *Guest tab*.
-
-Run this command to check if the `+guest+` account can read the file
-`+contract01.txt+`:
-
-[source,bash]
+.Output
+[source,text]
 ----
-cat proprietary/contract01.txt
+-rwxr-x---. 1 rhel team 117 Mar  5 23:01 tasks.txt
 ----
 
-____
-_NOTE:_ You may be tempted to use `+chmod+` with the recursive option
-(`+-R+`) to make this change instead of using `+find+`. The `+chmod -R+`
-command modifies subdirectories as well as files, however. Since you are
-removing execute permissions, using `+chmod+` recursively would lead to
-a situation where you could not `+cd+` into any of the subdirectories
-that you just modified. This would also prevent you from running any
-recursive operations to fix this issue, and you would have to manually
-change the permissions on each subdirectory individually.
-____
+This change is reflected in the fourth column of the `*ls -l*` output,
+which now says *team* instead of *root*.
 
-It is very important to double check your work when using the `+find+`
-to execute `+chmod+`, as running this command on the wrong directory
-could lock users out of all of their files.
+NOTE: Some people prefer the `*chgrp*` command for changing groups as it has identical syntax to `*chown*`, you do not have to add a colon when using `*chgrp*`. Others prefer to use `*chown*` with the colon as above so that they do not have to remember two different commands.
 
-This step is based on information from the
-https://www.redhat.com/sysadmin/audit-permissions-find[Enable Sysadmin
-article on the topic]. Head there for more information on increasing the
-specificity of what `+find+` returns.
+The final step in this lab will walk you through using `*find*` to
+locate any files that may have their permissions configured incorrectly.
