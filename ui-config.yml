@@ -19,5 +19,7 @@ antora:
       label: "Find Audit Permissions"
 
 tabs:
-  - name: ">_ terminal"
+  - name: ">_ root"
     url: /wetty
+    secondary_name: ">_ rhel"
+    secondary_url: /wetty
