@@ -4,6 +4,25 @@
 useradd guest
 groupadd team
 
+tee /srv/status.sh << EOF
+#! /bin/bash
+echo -n "status.sh successfully executed by "
+whoami
+EOF
+
+chmod +x /srv/status.sh
+
+tee /srv/tasks.txt << EOF
+1. Finish this Permissions Lab
+2. Do the Networking Configuration Basics Lab
+3. Listen to the latest episode of RHEL Presents
+EOF
+
+mkdir /srv/proprietary
+chown /srv/proprietary root:root
+chmod 0640 /srv/proprietary
+touch /srv/proprietary/contract{01..04}.txt
+
 #set up tmux so it has to restart itself whenever the system reboots
 
 #step 1: make a script
