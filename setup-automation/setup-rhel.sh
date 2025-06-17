@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # Create needed user and group
-useradd guest
 groupadd team
 
 tee /srv/status.sh << EOF
@@ -20,7 +19,7 @@ EOF
 
 mkdir /srv/proprietary
 chown /srv/proprietary root:root
-chmod 0640 /srv/proprietary
+chmod 0750 /srv/proprietary
 touch /srv/proprietary/contract{01..04}.txt
 
 #set up tmux so it has to restart itself whenever the system reboots
