@@ -10,7 +10,7 @@ image::chmod774.png[chmod 774]
 The owner user and owner group will have full permissions, but others
 will only be able to read the file.
 
-Return to *>_root* tab.
+Return to *>_root* terminal.
 
 Use `*chmod*` to modify the permissions on *status.sh* as previously
 discussed.
@@ -38,7 +38,7 @@ ls -l status.sh
 -rwxrwxr--. 1 root root  66 Jun  2 22:42 status.sh
 ----
 
-Go back to the *>_ rhel* tab.
+Go back to the *>_ rhel* terminal.
 
 Verify that you do not have permission to execute the status script as
 *rhel*:

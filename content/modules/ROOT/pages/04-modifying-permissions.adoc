@@ -10,7 +10,7 @@ case, it will give others read and execute access, but will not change
 the value of write access for the group. Return to the root terminal to
 execute this command.
 
-Go back to the *>_ root* tab.
+Go back to the *>_ root* terminal.
 
 Now change the permission of `*status.sh*`.
 
@@ -34,7 +34,7 @@ ls -l status.sh
 .Output
 [source,text]
 ----
--rwxr-xr-x. 1 root root 68 Mar  5 22:00 status.sh
+-rwxr-xr-x. 1 root root 68 Jun  5 22:00 status.sh
 ----
 
 NOTE: Just as `*o+rx*` added read and execute permissions for others,
@@ -45,7 +45,7 @@ explicitly set all permissions symbolically.
 
 
 Now the *rhel* user will be able to read and execute *status.sh*.
-Switch back to the *>_ rhel* tab and re-run the status script:
+Switch back to the *>_ rhel* terminal and re-run the status script:
 
 .Command
 [source,bash,subs="+macros,+attributes",role=execute]

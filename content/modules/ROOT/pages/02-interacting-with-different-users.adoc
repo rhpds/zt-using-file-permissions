@@ -36,7 +36,7 @@ execute but cannot write to this file. See the image below.
 Finally, all other users have no permissions, *—*, so they are unable to
 read, write, or execute this file.
 
-Switch to the `*>_rhel*` tab and traverse into the `*/srv*` directory.
+Switch to the terminal labeled `*>_rhel*` and traverse into the `*/srv*` directory.
 
 .Command
 [source,bash,subs="+macros,+attributes",role=execute]

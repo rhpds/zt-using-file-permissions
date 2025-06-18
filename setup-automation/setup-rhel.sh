@@ -9,7 +9,7 @@ echo -n "status.sh successfully executed by "
 whoami
 EOF
 
-chmod +x /srv/status.sh
+chmod 0750 /srv/status.sh
 
 tee /srv/tasks.txt << EOF
 1. Finish this Permissions Lab
@@ -17,10 +17,21 @@ tee /srv/tasks.txt << EOF
 3. Listen to the latest episode of RHEL Presents
 EOF
 
-mkdir /srv/proprietary
-chown /srv/proprietary root:root
-chmod 0750 /srv/proprietary
-touch /srv/proprietary/contract{01..04}.txt
+chmod 0750 /srv/tasks.txt
+
+export CONTRACTDIR=/srv/proprietary
+
+mkdir $CONTRACTDIR
+chown $CONTRACTDIR root:root
+chmod 0640 $CONTRACTDIR
+touch $CONTRACTDIR/contract{01..04}.txt
+
+echo "You should enjoy the subtle detours." > $CONTRACTDIR/contract01.txt
+echo "to the fullest," > $CONTRACTDIR/contract02.txt
+echo "because that is where you find the things" > $CONTRACTDIR/contract03.txt
+echo "that are more important than what you want." > $CONTRACTDIR/contract04.txt
+chmod 777 $CONTRACTDIR/*.txt
+
 
 #set up tmux so it has to restart itself whenever the system reboots
 
