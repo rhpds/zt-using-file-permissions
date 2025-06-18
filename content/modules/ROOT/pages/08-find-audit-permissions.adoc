@@ -4,7 +4,7 @@ The `find` command is highly versatile, but in this case you will be using it to
 
 The `-perm` option causes the `find` command to look at the access modes for each file. In this case you are calling `find` without a path, which means it will start looking in the current directory.
 
-First, from the **Root tab**, check for files that have the permission level __755__.
+First, from the *>_ root* terminal, check for files that have the permission level __755__.
 
 .Command
 [source,bash,subs="+macros,+attributes",role=execute]
