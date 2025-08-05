@@ -9,21 +9,16 @@ Permissions function differently when applied to directories. Read allows users 
 
 NOTE: There are three more permissions on top of the ones explained above: setuid, setgid, and sticky bit. These are much less commonly used and therefore outside of the scope of this lab, but this article on https://www.linux.com/training-tutorials/understanding-linux-file-permissions/[Understanding Linux File Permissions^] is a great place to start if you want more information on these additional permissions.
 
-It is important to properly assign permissions to files and directories
-created on a shared system so that files are not accidentally (or
-maliciously) tampered with, destroyed, or executed. The next section
-shows you how to view the permissions of files in an example directory.
+It is important to properly assign permissions to files and directories created on a shared system so that files are not accidentally (or maliciously) tampered with, destroyed, or executed. The next section shows you how to view the permissions of files in an example directory.
 
 == Displaying files and their permissions
 
-There are two terminals in the web interface. Click on the top terminal labelled
-`*>_ root*`.
+There are two terminals in the web interface. Click on the terminal labelled `*>_ root*`.
 
 .root tab
 image::root-term.png[root tab]
 
-For this lab, several files have been created for you to work with in
-the `*/srv*` directory. Use the `*cd*` command to navigate there:
+For this lab, several files have been created for you to work with in the `*/srv*` directory. Use the `*cd*` command to navigate there:
 
 .Command
 [source,bash,subs="+macros,+attributes",role=execute]
