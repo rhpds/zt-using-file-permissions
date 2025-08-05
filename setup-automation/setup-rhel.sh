@@ -14,7 +14,7 @@ chmod 0750 /srv/status.sh
 tee /srv/tasks.txt << EOF
 1. Finish this Permissions Lab
 2. Do the Networking Configuration Basics Lab
-3. Listen to the latest episode of RHEL Presents
+3. Listen to the latest episode of Into The Terminal
 EOF
 
 chmod 0750 /srv/tasks.txt
